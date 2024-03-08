@@ -268,6 +268,11 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3778644264426962316, guid: f9b62b630bf5903469167e0d0ad343ba,
+        type: 3}
+      propertyPath: m_Name
+      value: Door
+      objectReference: {fileID: 0}
     - target: {fileID: -3580291308652068606, guid: f9b62b630bf5903469167e0d0ad343ba,
         type: 3}
       propertyPath: m_Convex
@@ -461,22 +466,27 @@ PrefabInstance:
     - target: {fileID: 6490625522564147758, guid: f9b62b630bf5903469167e0d0ad343ba,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6870466
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6490625522564147758, guid: f9b62b630bf5903469167e0d0ad343ba,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6490625522564147758, guid: f9b62b630bf5903469167e0d0ad343ba,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7266134
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6490625522564147758, guid: f9b62b630bf5903469167e0d0ad343ba,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6490625522564147758, guid: f9b62b630bf5903469167e0d0ad343ba,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -93.206
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6507901977716847365, guid: f9b62b630bf5903469167e0d0ad343ba,
         type: 3}
