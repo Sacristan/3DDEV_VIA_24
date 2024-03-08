@@ -13,17 +13,19 @@ public class Door : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!isOpen && other.gameObject.CompareTag("Player"))
-        {
-            OpenDoor(true);
-        }
+        HandleDoorIfPlayer(true, other);
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (isOpen && other.gameObject.CompareTag("Player"))
+        HandleDoorIfPlayer(false, other);
+    }
+
+    void HandleDoorIfPlayer(bool openDoor, Collider other)
+    {
+        if (isOpen != openDoor && other.gameObject.CompareTag("Player"))
         {
-            OpenDoor(false);
+            OpenDoor(openDoor);
         }
     }
 
