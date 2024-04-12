@@ -17,5 +17,4 @@ public class HouseTrigger : PlayerTrigger
 
         MusicManager.instance.PlayMusicState(musicState);
     }
-
 }

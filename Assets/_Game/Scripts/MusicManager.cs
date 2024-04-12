@@ -18,9 +18,21 @@ public class MusicManager : MonoBehaviour
         public MusicState playAtState;
         public AudioClip clip;
     }
-
     [SerializeField] Track[] backgroundTracks;
     AudioSource _audioSource;
+    MusicState _currentMusicState = MusicState.None; //c# variable
+    public MusicState CurrentMusicState //c# property
+    {
+        get => _currentMusicState;
+        private set
+        {
+            if (_currentMusicState != value)
+            {
+                _currentMusicState = value;
+                StartCoroutine(RequestChangeMusicState(value));
+            }
+        }
+    }
 
     void Awake()
     {
@@ -31,12 +43,12 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        PlayMusicState(MusicState.OutsideAmbient);
+        CurrentMusicState = MusicState.OutsideAmbient;
     }
 
     public void PlayMusicState(MusicState musicState)
     {
-        StartCoroutine(RequestChangeMusicState(musicState));
+        CurrentMusicState = musicState;
     }
 
     IEnumerator RequestChangeMusicState(MusicState musicState)
