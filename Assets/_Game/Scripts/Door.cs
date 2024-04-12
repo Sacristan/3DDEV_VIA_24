@@ -1,40 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : PlayerTrigger
 {
     [SerializeField] Transform doorTransform;
     Vector3 openDoorRot = Vector3.up * -90;  //new Vector3(0, -90, 0); 
     Vector3 closedDoorRot = Vector3.zero; //new Vector3(0, 0, 0);
 
-    bool isOpen = false;
-
-    void OnTriggerEnter(Collider other)
+    protected override void UpdatePlayerInZone(bool result)
     {
-        HandleDoorIfPlayer(true, other);
+        base.UpdatePlayerInZone(result);
+        OpenDoor();
     }
 
-    void OnTriggerExit(Collider other)
+    void OpenDoor()
     {
-        HandleDoorIfPlayer(false, other);
-    }
-
-    void HandleDoorIfPlayer(bool openDoor, Collider other)
-    {
-        if (isOpen != openDoor && other.gameObject.CompareTag("Player"))
-        {
-            OpenDoor(openDoor);
-        }
-    }
-
-    void OpenDoor(bool flag)
-    {
-        isOpen = flag;
-
         Vector3 rot;
 
-        if (isOpen)
+        if (isPlayerInTrigger)
         {
             rot = openDoorRot;
         }
@@ -45,5 +27,4 @@ public class Door : MonoBehaviour
 
         doorTransform.localRotation = Quaternion.Euler(rot);
     }
-
 }
