@@ -545,9 +545,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931c345b693ce0b419d8aa626ac74404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusicClips:
-  - {fileID: 8300000, guid: fce62a0d009a25642bcecf630565e211, type: 3}
-  - {fileID: 8300000, guid: 3806acead97c38c4087ac5c3d26556f6, type: 3}
+  backgroundTracks:
+  - playAtState: 1
+    clip: {fileID: 8300000, guid: fce62a0d009a25642bcecf630565e211, type: 3}
+  - playAtState: 2
+    clip: {fileID: 8300000, guid: 3806acead97c38c4087ac5c3d26556f6, type: 3}
 --- !u!1001 &367952749833150000
 PrefabInstance:
   m_ObjectHideFlags: 0
