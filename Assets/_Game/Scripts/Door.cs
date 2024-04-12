@@ -5,7 +5,6 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField] Transform doorTransform;
-
     Vector3 openDoorRot = Vector3.up * -90;  //new Vector3(0, -90, 0); 
     Vector3 closedDoorRot = Vector3.zero; //new Vector3(0, 0, 0);
 
