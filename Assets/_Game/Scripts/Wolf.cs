@@ -34,7 +34,6 @@ public class Wolf : MonoBehaviour
     [SerializeField] float attackCloseEnoughDistance = 1.5f;
     [SerializeField] float sightDistance = 30f;
 
-
     Coroutine currentRoutine;
     Coroutine sightRoutine;
     Coroutine reachTargetRoutine;
@@ -44,12 +43,14 @@ public class Wolf : MonoBehaviour
     GameObject _player;
     Animator _animator;
 
-    void Start()
+    IEnumerator Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
         _player = GameObject.FindGameObjectWithTag("Player");
         _animator = GetComponentInChildren<Animator>();
+
+        yield return new WaitForSeconds(Random.Range(0.1f, 1f));
         CurrentState = State.Wandering;
     }
 
@@ -109,29 +110,6 @@ public class Wolf : MonoBehaviour
     void SetAttacking(bool flag)
     {
         _animator.SetBool("IsAttacking", flag);
-    }
-
-    IEnumerator SightRoutine()
-    {
-
-        while (CurrentState == State.Wandering)
-        {
-            Ray ray = new Ray(sightOrigin.position, transform.forward);
-            // Debug.DrawRay(ray.origin, ray.direction, Color.yellow);
-            Debug.DrawLine(ray.origin, ray.origin + ray.direction * sightDistance, Color.magenta, 1f);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, sightDistance))
-            {
-                // Debug.Log("Physics.Raycast true " + hit);
-                if (hit.transform.CompareTag("Player"))
-                {
-                    // Debug.Log("Physics.Raycast is Player");
-                    CurrentState = State.Chasing;
-                }
-            }
-
-            yield return new WaitForSeconds(0.5f);
-        }
     }
 
     IEnumerator ChaseRoutine()
@@ -203,15 +181,45 @@ public class Wolf : MonoBehaviour
 
     }
 
+    IEnumerator SightRoutine()
+    {
+
+        while (CurrentState == State.Wandering)
+        {
+            Ray ray = new Ray(sightOrigin.position, transform.forward);
+            // Debug.DrawRay(ray.origin, ray.direction, Color.yellow);
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction * sightDistance, Color.magenta, 1f);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, sightDistance))
+            {
+                if (hit.transform.CompareTag("Player"))
+                {
+                    CurrentState = State.Chasing;
+                }
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+
+
     #region Wander
     bool FindNewWanderDestination(out Vector3 wanderDestination)
     {
-        if (RandomPoint(transform.position, wanderDistanceRadius, out wanderDestination))
+        for (int i = 0; i < 30; i++)
         {
-            _navMeshAgent.SetDestination(wanderDestination);
-            return true;
+            if (RandomPoint(transform.position, wanderDistanceRadius, out wanderDestination))
+            {
+                if (CanReachTarget(wanderDestination))
+                {
+                    _navMeshAgent.SetDestination(wanderDestination);
+                    return true;
+                }
+            }
         }
 
+        wanderDestination = Vector3.zero;
         return false;
     }
 
