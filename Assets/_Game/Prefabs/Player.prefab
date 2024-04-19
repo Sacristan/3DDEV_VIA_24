@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3992232174612317890}
   - component: {fileID: 2827779946687422474}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Landing Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,8 @@ AudioSource:
   m_GameObject: {fileID: 22065597152086244}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6077141973196550813, guid: 99719576b2c040e438402b20c154f6ef,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -143,7 +144,7 @@ GameObject:
   - component: {fileID: 5166241440172006869}
   - component: {fileID: 4175496184199216118}
   - component: {fileID: 8267537795788570149}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -158,7 +159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540098222336378401}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.0017939592, z: -0, w: 0.99999845}
+  m_LocalRotation: {x: 0, y: 0.0017977266, z: 0, w: 0.9999984}
   m_LocalPosition: {x: 89.11, y: -0.0000076293945, z: 215.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -277,7 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3277907540584010911}
   - component: {fileID: 8207913509682593806}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jump Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +309,8 @@ AudioSource:
   m_GameObject: {fileID: 1494287371334669105}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6077141973196550813, guid: 99719576b2c040e438402b20c154f6ef,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -406,7 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4610829744687140838}
   - component: {fileID: 3157687016925181087}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crouch Start Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +439,8 @@ AudioSource:
   m_GameObject: {fileID: 2316539840370618561}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6077141973196550813, guid: 99719576b2c040e438402b20c154f6ef,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -535,7 +538,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5545178581152978772}
   - component: {fileID: 4965586666284141138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5273165884371736577}
   - component: {fileID: 3288047491889657302}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Step Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +615,8 @@ AudioSource:
   m_GameObject: {fileID: 4110937200100853106}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6077141973196550813, guid: 99719576b2c040e438402b20c154f6ef,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f8c14f2814b4b124a894a65c32c44987, type: 3}
   m_Resource: {fileID: 8300000, guid: f8c14f2814b4b124a894a65c32c44987, type: 3}
   m_PlayOnAwake: 0
@@ -710,7 +714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5702011668216634577}
   - component: {fileID: 8990350058237014027}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crouched Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +745,8 @@ AudioSource:
   m_GameObject: {fileID: 4845116655435916947}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6077141973196550813, guid: 99719576b2c040e438402b20c154f6ef,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f8c14f2814b4b124a894a65c32c44987, type: 3}
   m_Resource: {fileID: 8300000, guid: f8c14f2814b4b124a894a65c32c44987, type: 3}
   m_PlayOnAwake: 0
@@ -838,7 +843,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6444226207733580804}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crouch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -878,7 +883,7 @@ GameObject:
   - component: {fileID: 8508368729057236031}
   - component: {fileID: 9015777001594773835}
   - component: {fileID: 4190861954818726824}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: First Person Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1052,7 +1057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3160897488544859767}
   - component: {fileID: 4139975895601960572}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: First Person Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1129,7 +1134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8561251561360485157}
   - component: {fileID: 7948067788687219165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Running Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1160,7 +1165,8 @@ AudioSource:
   m_GameObject: {fileID: 6865271519806139499}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6077141973196550813, guid: 99719576b2c040e438402b20c154f6ef,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f8c14f2814b4b124a894a65c32c44987, type: 3}
   m_Resource: {fileID: 8300000, guid: f8c14f2814b4b124a894a65c32c44987, type: 3}
   m_PlayOnAwake: 0
@@ -1259,7 +1265,7 @@ GameObject:
   - component: {fileID: 5562774504737445349}
   - component: {fileID: 2070926507603722062}
   - component: {fileID: 7192007789846545371}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1343,7 +1349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 741477863535483418}
   - component: {fileID: 166158565075089866}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crouch End Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1374,7 +1380,8 @@ AudioSource:
   m_GameObject: {fileID: 8694270226097656484}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6077141973196550813, guid: 99719576b2c040e438402b20c154f6ef,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
