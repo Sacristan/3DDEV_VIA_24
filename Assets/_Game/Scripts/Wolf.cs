@@ -33,6 +33,7 @@ public class Wolf : MonoBehaviour
     [SerializeField] float attackCloseEnoughDistance = 1.5f;
 
     Coroutine currentRoutine;
+    Coroutine reachTargetRoutine;
     NavMeshAgent _navMeshAgent;
     Vector3 wanderDestination = Vector3.zero;
 
@@ -84,6 +85,13 @@ public class Wolf : MonoBehaviour
 
     IEnumerator ChaseRoutine()
     {
+        if (reachTargetRoutine != null)
+        {
+            StopCoroutine(reachTargetRoutine);
+            reachTargetRoutine = null;
+        }
+        reachTargetRoutine = StartCoroutine(CheckIfCanReachTarget());
+
         while (CurrentState == State.Chasing)
         {
             Vector3 playerPos = _player.transform.position;
@@ -96,6 +104,7 @@ public class Wolf : MonoBehaviour
             {
                 _navMeshAgent.SetDestination(playerPos);
             }
+
 
             yield return null;
         }
@@ -116,9 +125,31 @@ public class Wolf : MonoBehaviour
         }
     }
 
+    IEnumerator CheckIfCanReachTarget()
+    {
+        while (CurrentState == State.Chasing || CurrentState == State.Attacking)
+        {
+            if (!CanReachTarget(_player.transform.position)) CurrentState = State.Wandering;
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
     bool IsCloseEnough(Vector3 destination, float closeEnoughDistance)
     {
         return Vector3.Distance(transform.position, destination) < closeEnoughDistance;
+    }
+
+    bool CanReachTarget(Vector3 destination)
+    {
+        NavMeshPath navMeshPath = new();
+
+        if (_navMeshAgent.CalculatePath(destination, navMeshPath) && navMeshPath.status == NavMeshPathStatus.PathComplete)
+        {
+            return true;
+        }
+
+        return false;
+
     }
 
     #region Wander
