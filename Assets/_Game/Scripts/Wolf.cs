@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,12 +28,14 @@ public class Wolf : MonoBehaviour
         }
     }
 
+    [SerializeField] Transform sightOrigin;
     [SerializeField] float wanderCloseEnoughDistance = 1f;
     [SerializeField] Vector2 wanderWaitTime = new(2f, 4f);
     [SerializeField] float wanderDistanceRadius = 10f;
     [SerializeField] float attackCloseEnoughDistance = 1.5f;
-
+    [SerializeField] float sightDistance = 30f;
     Coroutine currentRoutine;
+    Coroutine sightRoutine;
     Coroutine reachTargetRoutine;
     NavMeshAgent _navMeshAgent;
     Vector3 wanderDestination = Vector3.zero;
@@ -44,7 +47,7 @@ public class Wolf : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = GameObject.FindGameObjectWithTag("Player");
 
-        CurrentState = State.Chasing;
+        CurrentState = State.Wandering;
     }
 
     void UpdateState()
@@ -69,6 +72,13 @@ public class Wolf : MonoBehaviour
 
     IEnumerator WanderRoutine()
     {
+        if (sightRoutine != null)
+        {
+            StopCoroutine(sightRoutine);
+            sightRoutine = null;
+        }
+        sightRoutine = StartCoroutine(SightRoutine());
+
         FindNewWanderDestination(out wanderDestination);
 
         while (CurrentState == State.Wandering)
@@ -78,8 +88,30 @@ public class Wolf : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(wanderWaitTime.x, wanderWaitTime.y));
                 FindNewWanderDestination(out wanderDestination);
             }
-
             yield return null;
+        }
+    }
+
+    IEnumerator SightRoutine()
+    {
+
+        while (CurrentState == State.Wandering)
+        {
+            Ray ray = new Ray(sightOrigin.position, transform.forward);
+            // Debug.DrawRay(ray.origin, ray.direction, Color.yellow);
+            Debug.DrawLine(ray.origin, ray.origin + ray.direction * sightDistance, Color.magenta, 1f);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, sightDistance))
+            {
+                // Debug.Log("Physics.Raycast true " + hit);
+                if (hit.transform.CompareTag("Player"))
+                {
+                    // Debug.Log("Physics.Raycast is Player");
+                    CurrentState = State.Chasing;
+                }
+            }
+
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
