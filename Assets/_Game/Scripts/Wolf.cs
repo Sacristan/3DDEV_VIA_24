@@ -30,15 +30,20 @@ public class Wolf : MonoBehaviour
     [SerializeField] float wanderCloseEnoughDistance = 1f;
     [SerializeField] Vector2 wanderWaitTime = new(2f, 4f);
     [SerializeField] float wanderDistanceRadius = 10f;
+    [SerializeField] float attackCloseEnoughDistance = 1.5f;
 
     Coroutine currentRoutine;
     NavMeshAgent _navMeshAgent;
     Vector3 wanderDestination = Vector3.zero;
 
+    GameObject _player;
+
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        CurrentState = State.Wandering;
+        _player = GameObject.FindGameObjectWithTag("Player");
+
+        CurrentState = State.Chasing;
     }
 
     void UpdateState()
@@ -57,16 +62,17 @@ public class Wolf : MonoBehaviour
                 currentRoutine = StartCoroutine(AttackRoutine());
                 break;
         }
+
+        _navMeshAgent.isStopped = CurrentState == State.Attacking;
     }
 
     IEnumerator WanderRoutine()
     {
-
         FindNewWanderDestination(out wanderDestination);
 
         while (CurrentState == State.Wandering)
         {
-            if (Vector3.Distance(transform.position, wanderDestination) < wanderCloseEnoughDistance)
+            if (IsCloseEnough(wanderDestination, wanderCloseEnoughDistance))
             {
                 yield return new WaitForSeconds(Random.Range(wanderWaitTime.x, wanderWaitTime.y));
                 FindNewWanderDestination(out wanderDestination);
@@ -78,14 +84,44 @@ public class Wolf : MonoBehaviour
 
     IEnumerator ChaseRoutine()
     {
-        yield return null;
+        while (CurrentState == State.Chasing)
+        {
+            Vector3 playerPos = _player.transform.position;
+
+            if (IsCloseEnough(playerPos, attackCloseEnoughDistance))
+            {
+                CurrentState = State.Attacking;
+            }
+            else
+            {
+                _navMeshAgent.SetDestination(playerPos);
+            }
+
+            yield return null;
+        }
     }
 
     IEnumerator AttackRoutine()
     {
-        yield return null;
+        _navMeshAgent.velocity = Vector3.zero;
+
+        while (CurrentState == State.Attacking)
+        {
+            if (!IsCloseEnough(_player.transform.position, attackCloseEnoughDistance))
+            {
+                CurrentState = State.Chasing;
+            }
+
+            yield return null;
+        }
     }
 
+    bool IsCloseEnough(Vector3 destination, float closeEnoughDistance)
+    {
+        return Vector3.Distance(transform.position, destination) < closeEnoughDistance;
+    }
+
+    #region Wander
     bool FindNewWanderDestination(out Vector3 wanderDestination)
     {
         if (RandomPoint(transform.position, wanderDistanceRadius, out wanderDestination))
@@ -111,5 +147,7 @@ public class Wolf : MonoBehaviour
         result = Vector3.zero;
         return false;
     }
+
+    #endregion
 
 }

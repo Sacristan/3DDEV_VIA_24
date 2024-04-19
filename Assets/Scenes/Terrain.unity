@@ -1182,7 +1182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d937afef1d9b7409dfa07299036289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testDestination: {fileID: 206757310}
+  wanderCloseEnoughDistance: 1
+  wanderWaitTime: {x: 2, y: 4}
+  wanderDistanceRadius: 10
+  attackCloseEnoughDistance: 2.5
 --- !u!1 &1980155654
 GameObject:
   m_ObjectHideFlags: 0
