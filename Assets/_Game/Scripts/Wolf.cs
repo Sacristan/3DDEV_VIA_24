@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,6 +33,8 @@ public class Wolf : MonoBehaviour
     [SerializeField] float wanderDistanceRadius = 10f;
     [SerializeField] float attackCloseEnoughDistance = 1.5f;
     [SerializeField] float sightDistance = 30f;
+
+
     Coroutine currentRoutine;
     Coroutine sightRoutine;
     Coroutine reachTargetRoutine;
@@ -41,18 +42,23 @@ public class Wolf : MonoBehaviour
     Vector3 wanderDestination = Vector3.zero;
 
     GameObject _player;
+    Animator _animator;
 
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _player = GameObject.FindGameObjectWithTag("Player");
 
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _animator = GetComponentInChildren<Animator>();
         CurrentState = State.Wandering;
     }
 
     void UpdateState()
     {
         if (currentRoutine != null) StopCoroutine(currentRoutine);
+
+        SetRunning(CurrentState == State.Chasing);
+        SetAttacking(CurrentState == State.Attacking);
 
         switch (CurrentState)
         {
@@ -80,16 +86,29 @@ public class Wolf : MonoBehaviour
         sightRoutine = StartCoroutine(SightRoutine());
 
         FindNewWanderDestination(out wanderDestination);
+        SetRunning(true);
 
         while (CurrentState == State.Wandering)
         {
             if (IsCloseEnough(wanderDestination, wanderCloseEnoughDistance))
             {
+                SetRunning(false);
                 yield return new WaitForSeconds(Random.Range(wanderWaitTime.x, wanderWaitTime.y));
                 FindNewWanderDestination(out wanderDestination);
+                SetRunning(true);
             }
             yield return null;
         }
+    }
+
+    void SetRunning(bool flag)
+    {
+        _animator.SetBool("IsRunning", flag);
+    }
+
+    void SetAttacking(bool flag)
+    {
+        _animator.SetBool("IsAttacking", flag);
     }
 
     IEnumerator SightRoutine()
