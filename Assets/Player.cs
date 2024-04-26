@@ -7,12 +7,6 @@ public class Player : MonoBehaviour
     float health = MaxHealth;
     bool isDead = false;
 
-    IEnumerator Start()
-    {
-        yield return null;
-        GameManager.Instance.PlayerHealthChanged(health);
-    }
-
     public void AddDamage(float damage)
     {
         health -= damage;
