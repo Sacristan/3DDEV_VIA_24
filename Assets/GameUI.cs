@@ -8,11 +8,13 @@ public class GameUI : MonoBehaviour
     const string GameLostText = "You are eaten!";
 
     [SerializeField] TMPro.TextMeshProUGUI notificationText;
+    [SerializeField] TMPro.TextMeshProUGUI healthText;
 
     IEnumerator Start()
     {
         GameManager.Instance.OnGameWon += GameWon;
         GameManager.Instance.OnGameLost += GameLost;
+        GameManager.Instance.OnPlayerHealthChanged += PlayerHealthChanged;
 
         notificationText.text = GameStartText;
         yield return new WaitForSeconds(3f);
@@ -29,4 +31,8 @@ public class GameUI : MonoBehaviour
         notificationText.text = GameLostText;
     }
 
+    void PlayerHealthChanged(float health)
+    {
+        healthText.text = $"Health: {health}";
+    }
 }

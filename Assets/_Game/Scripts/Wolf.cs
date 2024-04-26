@@ -33,21 +33,21 @@ public class Wolf : MonoBehaviour
     [SerializeField] float wanderDistanceRadius = 10f;
     [SerializeField] float attackCloseEnoughDistance = 1.5f;
     [SerializeField] float sightDistance = 30f;
-
+    [SerializeField] float biteDamageToPlayer = 25f;
     Coroutine currentRoutine;
     Coroutine sightRoutine;
     Coroutine reachTargetRoutine;
     NavMeshAgent _navMeshAgent;
     Vector3 wanderDestination = Vector3.zero;
 
-    GameObject _player;
+    Player _player;
     Animator _animator;
 
     IEnumerator Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = FindAnyObjectByType<Player>();
         _animator = GetComponentInChildren<Animator>();
 
         yield return new WaitForSeconds(Random.Range(0.1f, 1f));
@@ -139,18 +139,30 @@ public class Wolf : MonoBehaviour
         }
     }
 
+    bool isCloseEnoughForAttack = false;
+
     IEnumerator AttackRoutine()
     {
         _navMeshAgent.velocity = Vector3.zero;
 
         while (CurrentState == State.Attacking)
         {
-            if (!IsCloseEnough(_player.transform.position, attackCloseEnoughDistance))
+            isCloseEnoughForAttack = IsCloseEnough(_player.transform.position, attackCloseEnoughDistance);
+
+            if (!isCloseEnoughForAttack)
             {
                 CurrentState = State.Chasing;
             }
 
             yield return null;
+        }
+    }
+
+    public void BiteAttack()
+    {
+        if (CurrentState == State.Attacking && isCloseEnoughForAttack)
+        {
+            _player.AddDamage(biteDamageToPlayer);
         }
     }
 
