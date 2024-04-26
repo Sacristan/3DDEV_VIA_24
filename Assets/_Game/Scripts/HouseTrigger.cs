@@ -6,6 +6,11 @@ public class HouseTrigger : PlayerTrigger
     {
         base.UpdatePlayerInZone(result);
         HandleMusic();
+
+        if (isPlayerInTrigger)
+        {
+            GameManager.Instance.PlayerInHouse();
+        }
     }
 
     void HandleMusic()
